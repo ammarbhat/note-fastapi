@@ -1,0 +1,608 @@
+[
+    {
+        "id": 1,
+        "task": "organize desk",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "update system",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "attend team meeting",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "backup laptop files",
+        "status": true,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "cook dinner",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "walk the dog",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "repair bicycle",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "buy groceries",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "revise chapter notes",
+        "status": true,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "go for a run",
+        "status": false,
+        "date": "01-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "book flight tickets",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "write unit tests",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "deploy application",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "fix bug in code",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "update LinkedIn profile",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "water the plants",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "buy groceries",
+        "status": false,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "repair bicycle",
+        "status": false,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "sort emails",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "finish python assignment",
+        "status": true,
+        "date": "02-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "do laundry",
+        "status": false,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "repair bicycle",
+        "status": true,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "clean the house",
+        "status": true,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "repair bicycle",
+        "status": true,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "water the plants",
+        "status": true,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "vacuum the house",
+        "status": true,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "sort emails",
+        "status": false,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "attend team meeting",
+        "status": true,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "pay electricity bill",
+        "status": false,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "iron clothes",
+        "status": false,
+        "date": "03-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "organize desk",
+        "status": true,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "practice guitar",
+        "status": false,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "submit tax documents",
+        "status": false,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "submit tax documents",
+        "status": true,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "buy birthday gift",
+        "status": true,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "pay electricity bill",
+        "status": true,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "call mom",
+        "status": false,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "sort emails",
+        "status": false,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "update system",
+        "status": false,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "water the plants",
+        "status": false,
+        "date": "04-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "plan grocery list",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "renew gym membership",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "clean car",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "clean the house",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "finish python assignment",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "revise chapter notes",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "reply to messages",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "iron clothes",
+        "status": true,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "clean the house",
+        "status": false,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "submit tax documents",
+        "status": true,
+        "date": "05-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "watch a movie",
+        "status": false,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "fix the leaking tap",
+        "status": true,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "renew gym membership",
+        "status": false,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "review pull request",
+        "status": false,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "call mom",
+        "status": false,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "attend team meeting",
+        "status": true,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "cook dinner",
+        "status": true,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "reply to messages",
+        "status": true,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "go for a run",
+        "status": true,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "book flight tickets",
+        "status": false,
+        "date": "06-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "call mom",
+        "status": true,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "book flight tickets",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "renew gym membership",
+        "status": true,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "update resume",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "meditate for 10 minutes",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "read a book",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "update LinkedIn profile",
+        "status": true,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "watch a movie",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "revise chapter notes",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "call mom",
+        "status": false,
+        "date": "07-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "fix bug in code",
+        "status": false,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "update resume",
+        "status": false,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "water the plants",
+        "status": true,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "write blog post",
+        "status": true,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "watch a movie",
+        "status": false,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "do laundry",
+        "status": false,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "sort emails",
+        "status": true,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "read documentation",
+        "status": true,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "design database schema",
+        "status": false,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "set up virtual environment",
+        "status": true,
+        "date": "08-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "prepare presentation",
+        "status": false,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "meditate for 10 minutes",
+        "status": true,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "learn a new recipe",
+        "status": false,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "organize desk",
+        "status": true,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "learn a new recipe",
+        "status": true,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "call mom",
+        "status": false,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "renew gym membership",
+        "status": false,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "pay electricity bill",
+        "status": false,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "attend team meeting",
+        "status": true,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "set up virtual environment",
+        "status": false,
+        "date": "09-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "backup laptop files",
+        "status": true,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 2,
+        "task": "update system",
+        "status": false,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 3,
+        "task": "pay electricity bill",
+        "status": false,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 4,
+        "task": "buy groceries",
+        "status": true,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 5,
+        "task": "do laundry",
+        "status": false,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 6,
+        "task": "learn a new recipe",
+        "status": true,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 7,
+        "task": "cook dinner",
+        "status": false,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 8,
+        "task": "plan grocery list",
+        "status": true,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 9,
+        "task": "clean the house",
+        "status": true,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 10,
+        "task": "study for exam",
+        "status": false,
+        "date": "10-08-2026"
+    },
+    {
+        "id": 1,
+        "task": "I was born!",
+        "date": "13-05-2004",
+        "status": true
+    }
+]
