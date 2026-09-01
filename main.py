@@ -17,11 +17,10 @@ def all_notes(db = Depends(get_db)):
 
 
 @app.get("/notes/{date}")
-def notes_by_date(date: date, db=Depends(get_db)):
-    notes = []
-    notes.append(db.query(Note).filter(Note.event_date.contains(date)).all())
+def notes_by_date(note_date: date, db=Depends(get_db)):
+    notes = db.query(Note).filter(Note.event_date.contains(note_date)).all()
     if len(notes) > 0:
-        return db.query(Note).filter(Note.event_date.contains(date)).all()
+        return notes
     else:
         raise HTTPException(status_code=404, detail="No items found")
 
@@ -37,7 +36,7 @@ def post_note(note: NoteBase, db=Depends(get_db)):
 def delete_note(note_id: int, db=Depends(get_db)):
   note = db.query(Note).filter(Note.id == note_id).first()
   if note is None:
-      raise HTTPException(status_code=422, detail="note not found")
+      raise HTTPException(status_code=404, detail="note not found")
   db.delete(note)
   db.commit()
   return {"message": "note deleted"}
@@ -46,7 +45,7 @@ def delete_note(note_id: int, db=Depends(get_db)):
 def update_note(note_id: int, edits : EditBase, db = Depends(get_db)):
     note = db.query(Note).filter(Note.id == note_id).first()
     if note is None:
-        raise HTTPException(status_code=422, detail="note not found")
+        raise HTTPException(status_code=404, detail="note not found")
     note.task = edits.task
     note.event_date = edits.event_date
     note.status = edits.status
