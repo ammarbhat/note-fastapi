@@ -3,7 +3,7 @@ from typing import Annotated
 from pydantic import BeforeValidator
 from datetime import datetime, date
 from models import Note
-from schemas import NoteBase
+from schemas import NoteBase, EditBase
 from database import engine, Base, get_db
 
 
@@ -12,8 +12,8 @@ Base.metadata.create_all(bind=engine)
 
 
 @app.get("/notes")
-def hello():
-    return {"message": "under construction"}
+def all_notes(db = Depends(get_db)):
+    return db.query(Note).all()
 
 
 @app.get("/notes/{date}")
@@ -37,12 +37,18 @@ def post_note(note: NoteBase, db=Depends(get_db)):
 def delete_note(note_id: int, db=Depends(get_db)):
   note = db.query(Note).filter(Note.id == note_id).first()
   if note is None:
-      raise HTTPException(status_code=404, detail="note not found")
+      raise HTTPException(status_code=422, detail="note not found")
   db.delete(note)
   db.commit()
   return {"message": "note deleted"}
 
 @app.put("/notes/{note_id}")
-def update_note(note_id: int, db = Depends(get_db)):
+def update_note(note_id: int, edits : EditBase, db = Depends(get_db)):
     note = db.query(Note).filter(Note.id == note_id).first()
-    
+    if note is None:
+        raise HTTPException(status_code=422, detail="note not found")
+    note.task = edits.task
+    note.event_date = edits.event_date
+    note.status = edits.status
+    db.commit()
+    return {"message" : "Note edited"}
