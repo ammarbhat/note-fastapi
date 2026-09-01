@@ -3,7 +3,7 @@ from sqlalchemy.orm import (
     Mapped,
     mapped_column,
 )
-from database import Base
+from crud.database import Base
 
 class Note(Base):
     __tablename__ = "notes"

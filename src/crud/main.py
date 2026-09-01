@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated
 from pydantic import BeforeValidator
 from datetime import datetime, date
-from models import Note
-from schemas import NoteBase, EditBase
-from database import engine, Base, get_db
+from crud.models import Note
+from crud.schemas import NoteBase, EditBase
+from crud.database import engine, Base, get_db
 
 
 app = FastAPI()
