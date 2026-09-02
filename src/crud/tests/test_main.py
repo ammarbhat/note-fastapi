@@ -56,7 +56,7 @@ def test_note_not_found():
     response = client.get("/notes/2026-05-13")  
     assert response.status_code == 404
 
-def test_create_note():
+def test_create_note(test_db):
     response = client.post("/notes/", json={"task": "hey", "status": True, "event_date": "2026-05-13"})
     assert response.status_code == 200
     assert response.json() == {"message" : "note added"}
