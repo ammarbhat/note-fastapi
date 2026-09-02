@@ -16,7 +16,7 @@ def all_notes(db = Depends(get_db)):
     return db.query(Note).all()
 
 
-@app.get("/notes/{date}")
+@app.get("/notes/{note_date}")
 def notes_by_date(note_date: date, db=Depends(get_db)):
     notes = db.query(Note).filter(Note.event_date.contains(note_date)).all()
     if len(notes) > 0:
