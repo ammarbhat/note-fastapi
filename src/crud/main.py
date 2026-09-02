@@ -50,4 +50,4 @@ def update_note(note_id: int, edits : EditBase, db = Depends(get_db)):
     note.event_date = edits.event_date
     note.status = edits.status
     db.commit()
-    return {"message" : "Note edited"}
+    return {"message" : "note edited"}
