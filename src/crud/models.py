@@ -5,6 +5,7 @@ from sqlalchemy.orm import (
 )
 from crud.database import Base
 
+
 class Note(Base):
     __tablename__ = "notes"
 
@@ -12,4 +13,3 @@ class Note(Base):
     task: Mapped[str]
     status: Mapped[bool]
     event_date: Mapped[date]
-

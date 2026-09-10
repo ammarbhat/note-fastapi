@@ -52,18 +52,24 @@ def test_notes_by_date(test_db):
     response = client.get("/notes/2026-05-13")
     assert response.status_code == 200
 
+
 def test_note_not_found():
-    response = client.get("/notes/2026-05-13")  
+    response = client.get("/notes/2026-05-13")
     assert response.status_code == 404
 
+
 def test_create_note(test_db):
-    response = client.post("/notes/", json={"task": "hey", "status": True, "event_date": "2026-05-13"})
+    response = client.post(
+        "/notes/", json={"task": "hey", "status": True, "event_date": "2026-05-13"}
+    )
     assert response.status_code == 200
-    assert response.json() == {"message" : "note added"}
+    assert response.json() == {"message": "note added"}
+
 
 def test_create_note_invalid_input():
-    response = client.post("/notes/", json={ "status": True, "event_date": "2026-05-13"})
+    response = client.post("/notes/", json={"status": True, "event_date": "2026-05-13"})
     assert response.status_code == 422
+
 
 def test_put(test_db):
     note = Note(task="anythings", status=True, event_date=date(2026, 5, 13))
@@ -71,16 +77,23 @@ def test_put(test_db):
     test_db.commit()
     test_db.refresh(note)
 
-    response = client.put(f"/notes/{note.id}", json={ "task": "hey", "status": True, "event_date": "2026-05-13"})
+    response = client.put(
+        f"/notes/{note.id}",
+        json={"task": "hey", "status": True, "event_date": "2026-05-13"},
+    )
     assert response.status_code == 200
-    assert response.json() == {"message" : "note edited"}
+    assert response.json() == {"message": "note edited"}
 
     test_db.refresh(note)
     assert note.task == "hey"
 
+
 def test_put_invalid():
-    response = client.put(f"/notes/1", json={ "task": "hey", "status": True, "event_date": "2026-05-13"})
+    response = client.put(
+        f"/notes/1", json={"task": "hey", "status": True, "event_date": "2026-05-13"}
+    )
     assert response.status_code == 404
+
 
 def test_delete(test_db):
     note = Note(task="anythings", status=True, event_date=date(2026, 5, 13))
@@ -90,6 +103,7 @@ def test_delete(test_db):
 
     response = client.delete(f"/notes/{note.id}")
     assert response.status_code == 200
+
 
 def test_invalid_delete():
     response = client.delete(f"/notes/1")
