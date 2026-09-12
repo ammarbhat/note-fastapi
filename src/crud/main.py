@@ -2,12 +2,15 @@ from fastapi import FastAPI, HTTPException, Depends
 from typing import Annotated
 from pydantic import BeforeValidator
 from datetime import datetime, date
-from crud.models import Note
-from crud.schemas import NoteBase, EditBase
+from crud.models import Note, User
+from crud.schemas import NoteBase, EditBase, UserBase
 from crud.database import engine, Base, get_db
+from pwdlib import PasswordHash
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
+
+pwdhasher = PasswordHash.recommended()
 
 
 @app.get("/notes")
@@ -52,3 +55,14 @@ def update_note(note_id: int, edits: EditBase, db=Depends(get_db)):
     note.status = edits.status
     db.commit()
     return {"message": "note edited"}
+
+
+@app.post("/users/")
+def add_user(user: UserBase, db=Depends(get_db)):
+    new_user = User(
+        username=user.username,
+        email=user.email,
+        hash_password=pwdhasher.hash(user.password),
+    )
+    db.add(new_user)
+    db.commit()

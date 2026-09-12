@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from datetime import date
 
 
@@ -10,3 +10,9 @@ class NoteBase(BaseModel):
 
 class EditBase(NoteBase):
     event_date: date
+
+
+class UserBase(BaseModel):
+    username: str
+    email: EmailStr
+    password: str

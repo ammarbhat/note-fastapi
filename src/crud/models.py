@@ -1,6 +1,7 @@
 from datetime import date
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from crud.database import Base
+from sqlalchemy import ForeignKey
 
 
 class User(Base):
@@ -23,5 +24,6 @@ class Note(Base):
     task: Mapped[str]
     status: Mapped[bool]
     event_date: Mapped[date]
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
-    users: Mapped["User"] = relationship(back_populates="notes")
+    user: Mapped["User"] = relationship(back_populates="notes")
