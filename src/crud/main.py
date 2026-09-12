@@ -70,7 +70,8 @@ def add_user(user: UserBase, db=Depends(get_db)):
         hash_password=pwdhasher.hash(user.password),
     )
     test_user = db.query(User).filter(User.username == user.username).first()
-    if user.username == test_user.username:
+    if  test_user:
+     if user.username == test_user.username:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="user already exists")
     db.add(new_user)
     db.commit()
