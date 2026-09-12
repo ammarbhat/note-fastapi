@@ -1,9 +1,9 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, status
 from typing import Annotated
 from pydantic import BeforeValidator
 from datetime import datetime, date
 from crud.models import Note, User
-from crud.schemas import NoteBase, EditBase, UserBase
+from crud.schemas import NoteBase, EditBase, UserBase, DeleteRequest
 from crud.database import engine, Base, get_db
 from pwdlib import PasswordHash
 
@@ -69,5 +69,21 @@ def add_user(user: UserBase, db=Depends(get_db)):
         email=user.email,
         hash_password=pwdhasher.hash(user.password),
     )
+    test_user = db.query(User).filter(User.username == user.username).first()
+    if user.username == test_user.username:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="user already exists")
     db.add(new_user)
     db.commit()
+
+
+@app.delete("/users/{username}")
+def delete_user(username: str, body: DeleteRequest, db=Depends(get_db)):
+    user = db.query(User).filter(User.username == username).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="user not found")
+    elif user.hash_password != pwdhasher.hash(body.password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid username or password")
+    else:
+        db.delete(user)
+        db.commit()
+        return {"message" : "User deleted"}
