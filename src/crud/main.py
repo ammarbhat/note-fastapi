@@ -81,7 +81,7 @@ def delete_user(username: str, body: DeleteRequest, db=Depends(get_db)):
     user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise HTTPException(status_code=404, detail="user not found")
-    elif user.hash_password != pwdhasher.hash(body.password):
+    elif not pwdhasher.verify(body.password, user.hash_password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid username or password")
     else:
         db.delete(user)
