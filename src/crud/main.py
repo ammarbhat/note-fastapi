@@ -29,7 +29,12 @@ def notes_by_date(note_date: date, db=Depends(get_db)):
 
 @app.post("/notes/")
 def post_note(note: NoteBase, db=Depends(get_db)):
-    new_note = Note(task=note.task, status=note.status, event_date=note.event_date)
+    new_note = Note(
+        task=note.task,
+        status=note.status,
+        event_date=note.event_date,
+        user_id=note.user_id,
+    )
     db.add(new_note)
     db.commit()
     return {"message": "note added"}

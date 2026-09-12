@@ -6,6 +6,7 @@ class NoteBase(BaseModel):
     task: str
     status: bool
     event_date: date = Field(examples=["2004-05-13"])
+    user_id: int
 
 
 class EditBase(NoteBase):
