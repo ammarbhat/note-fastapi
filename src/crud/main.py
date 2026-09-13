@@ -40,7 +40,7 @@ def authenticate_user(db, username: str, password: str):
     user = get_user(db, username)
     if not user:
         verify_password(password, DUMMY_HASH)
-    if not verify_password(password, user.hash_password):
+    if not verify_password(user.hash_password, password):
         return False
     return user
 
@@ -76,8 +76,28 @@ def get_current_user(token: Annotated[str, Depends(oauth_scheme)], db=Depends(ge
     return user
 
 
+@app.post("/token")
+def login_for_access_token(
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db=Depends(get_db)
+) -> Token:
+    user = authenticate_user(db, form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_acess_token(
+        data={"sub": user.username}, expires_delta=access_token_expires
+    )
+    return Token(acess_token=access_token, token_type="Bearer")
+
+
 @app.get("/notes")
-def all_notes(db=Depends(get_db)):
+def all_notes(
+    current_user: Annotated[User, Depends(get_current_user)], db=Depends(get_db)
+):
     return db.query(Note).all()
 
 
