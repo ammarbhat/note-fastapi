@@ -1,9 +1,8 @@
 from fastapi import FastAPI, HTTPException, Depends, status
 from typing import Annotated
-from pydantic import BeforeValidator
 from datetime import datetime, date
 from crud.models import Note, User
-from crud.schemas import NoteBase, EditBase, UserBase, DeleteRequest
+from crud.schemas import NoteBase, EditBase, UserBase, Classified
 from crud.database import engine, Base, get_db
 from pwdlib import PasswordHash
 
@@ -11,6 +10,12 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 pwdhasher = PasswordHash.recommended()
+
+
+def get_user(db, username: str):
+    user = db.query(User).filter(User.username == username).first()
+    
+
 
 
 @app.get("/notes")
@@ -63,11 +68,11 @@ def update_note(note_id: int, edits: EditBase, db=Depends(get_db)):
 
 
 @app.post("/users/")
-def add_user(user: UserBase, db=Depends(get_db)):
+def add_user(user: UserBase,body: Classified, db=Depends(get_db)):
     new_user = User(
         username=user.username,
         email=user.email,
-        hash_password=pwdhasher.hash(user.password),
+        hash_password=pwdhasher.hash(body.password),
     )
     test_user = db.query(User).filter(User.username == user.username).first()
     if  test_user:
@@ -78,7 +83,7 @@ def add_user(user: UserBase, db=Depends(get_db)):
 
 
 @app.delete("/users/{username}")
-def delete_user(username: str, body: DeleteRequest, db=Depends(get_db)):
+def delete_user(username: str, body: Classified, db=Depends(get_db)):
     user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise HTTPException(status_code=404, detail="user not found")
