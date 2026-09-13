@@ -5,9 +5,15 @@ from crud.models import Note, User
 from crud.schemas import NoteBase, EditBase, UserBase, Classified
 from crud.database import engine, Base, get_db
 from pwdlib import PasswordHash
-
+from jwt.exceptions import InvalidTokenError
+import jwt
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
+
+SECRET_KEY = "d158cfbc72dc60929a36c29d9d3eea4d405403328f4f4e9e289ddfba1d35e54f"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 
 pwdhasher = PasswordHash.recommended()
 DUMMY_HASH = pwdhasher.hash("dummypassword")
