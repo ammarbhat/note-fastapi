@@ -10,12 +10,27 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 pwdhasher = PasswordHash.recommended()
+DUMMY_HASH = pwdhasher.hash("dummypassword")
 
+def verify_password(password, hashed_password):
+    return pwdhasher.verify(hashed_password, password)
+
+def get_hash(password):
+    return pwdhasher.hash(password)
 
 def get_user(db, username: str):
     user = db.query(User).filter(User.username == username).first()
-    
+    if user is None:
+       return False
+    return user
 
+def authenticate_user(db, username: str, password: str):
+    user = get_user(db, username)
+    if not user:
+        verify_password(password, DUMMY_HASH)
+    if not verify_password(password, user.hash_password):
+        return False
+    return user
 
 
 @app.get("/notes")
