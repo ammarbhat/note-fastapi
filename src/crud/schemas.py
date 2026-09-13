@@ -17,15 +17,19 @@ class UserBase(BaseModel):
     username: str
     email: EmailStr
 
+
 class Classified(BaseModel):
     password: str
 
+
 class Token(BaseModel):
-    acess_token: str
+    access_token: str
     token_type: str
+
 
 class TokenData(BaseModel):
     username: str | None = None
+
 
 class UserInDb(BaseModel):
     hash_password: str

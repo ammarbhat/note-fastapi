@@ -22,7 +22,7 @@ DUMMY_HASH = pwdhasher.hash("dummypassword")
 
 
 def verify_password(password, hashed_password):
-    return pwdhasher.verify(hashed_password, password)
+    return pwdhasher.verify(password, hashed_password)
 
 
 def get_hash(password):
@@ -40,12 +40,13 @@ def authenticate_user(db, username: str, password: str):
     user = get_user(db, username)
     if not user:
         verify_password(password, DUMMY_HASH)
-    if not verify_password(user.hash_password, password):
+        return False
+    if not verify_password(password, user.hash_password):
         return False
     return user
 
 
-def create_acess_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -88,10 +89,10 @@ def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_acess_token(
+    access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return Token(acess_token=access_token, token_type="Bearer")
+    return Token(access_token=access_token, token_type="Bearer")
 
 
 @app.get("/notes")
