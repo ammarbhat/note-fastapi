@@ -1,10 +1,10 @@
 from fastapi.testclient import TestClient
 import pytest
-from crud.main import app
+from crud.main import app, get_current_user
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from crud.database import Base, get_db
-from crud.models import Note
+from crud.models import Note, User
 from datetime import date
 from sqlalchemy.pool import StaticPool
 
@@ -26,7 +26,12 @@ def override_get_db():
         db.close()
 
 
+def override_get_current_user():
+    return User(id=1, username="testuser", email="test@test.com", hash_password="fake")
+
+
 app.dependency_overrides[get_db] = override_get_db
+app.dependency_overrides[get_current_user] = override_get_current_user
 
 
 @pytest.fixture
