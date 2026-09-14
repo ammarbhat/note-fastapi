@@ -50,7 +50,7 @@ def test_all_notes():
 
 
 def test_notes_by_date(test_db):
-    note = Note(task="anythings", status=True, event_date=date(2026, 5, 13))
+    note = Note(task="anythings", status=True, event_date=date(2026, 5, 13), user_id=1)
     test_db.add(note)
     test_db.commit()
 
@@ -65,26 +65,29 @@ def test_note_not_found():
 
 def test_create_note(test_db):
     response = client.post(
-        "/notes/", json={"task": "hey", "status": True, "event_date": "2026-05-13"}
+        "/notes/",
+        json={"task": "hey", "status": True, "event_date": "2026-05-13", "user_id": 1},
     )
     assert response.status_code == 200
     assert response.json() == {"message": "note added"}
 
 
 def test_create_note_invalid_input():
-    response = client.post("/notes/", json={"status": True, "event_date": "2026-05-13"})
+    response = client.post(
+        "/notes/", json={"status": True, "event_date": "2026-05-13", "user_id": 1}
+    )
     assert response.status_code == 422
 
 
 def test_put(test_db):
-    note = Note(task="anythings", status=True, event_date=date(2026, 5, 13))
+    note = Note(task="anythings", status=True, event_date=date(2026, 5, 13), user_id=1)
     test_db.add(note)
     test_db.commit()
     test_db.refresh(note)
 
     response = client.put(
         f"/notes/{note.id}",
-        json={"task": "hey", "status": True, "event_date": "2026-05-13"},
+        json={"task": "hey", "status": True, "event_date": "2026-05-13", "user_id": 1},
     )
     assert response.status_code == 200
     assert response.json() == {"message": "note edited"}
@@ -95,14 +98,19 @@ def test_put(test_db):
 
 def test_put_invalid():
     response = client.put(
-        f"/notes/1", json={"task": "hey", "status": True, "event_date": "2026-05-13"}
+        f"/notes/1",
+        json={"task": "hey", "status": True, "event_date": "2026-05-13", "user_id": 1},
     )
     assert response.status_code == 404
 
 
 def test_delete(test_db):
-    note = Note(task="anythings", status=True, event_date=date(2026, 5, 13))
+    note = Note(task="anythings", status=True, event_date=date(2026, 5, 13), user_id=1)
+    user = User(username="john", email="johndoe@example.com", hash_password="stirng")
+
     test_db.add(note)
+    test_db.commit()
+    test_db.add(user)
     test_db.commit()
     test_db.refresh(note)
 
