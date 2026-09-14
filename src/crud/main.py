@@ -47,6 +47,7 @@ def authenticate_user(db, username: str, password: str):
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
+
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -103,7 +104,11 @@ def all_notes(
 
 
 @app.get("/notes/{note_date}")
-def notes_by_date(note_date: date, db=Depends(get_db)):
+def notes_by_date(
+    note_date: date,
+    curr: Annotated[User, Depends(get_current_user)],
+    db=Depends(get_db),
+):
     notes = db.query(Note).filter(Note.event_date.contains(note_date)).all()
     if len(notes) > 0:
         return notes
@@ -112,7 +117,9 @@ def notes_by_date(note_date: date, db=Depends(get_db)):
 
 
 @app.post("/notes/")
-def post_note(note: NoteBase, db=Depends(get_db)):
+def post_note(
+    note: NoteBase, curr: Annotated[User, Depends(get_current_user)], db=Depends(get_db)
+):
     new_note = Note(
         task=note.task,
         status=note.status,
@@ -125,17 +132,27 @@ def post_note(note: NoteBase, db=Depends(get_db)):
 
 
 @app.delete("/notes/{note_id}")
-def delete_note(note_id: int, db=Depends(get_db)):
+def delete_note(
+    note_id: int, curr: Annotated[User, Depends(get_current_user)], db=Depends(get_db)
+):
     note = db.query(Note).filter(Note.id == note_id).first()
+    user = db.query(User).filter(User.username == curr.username).first()
     if note is None:
         raise HTTPException(status_code=404, detail="note not found")
+    if user.id != note.user_id:
+        return {"message": "not your note"}
     db.delete(note)
     db.commit()
     return {"message": "note deleted"}
 
 
 @app.put("/notes/{note_id}")
-def update_note(note_id: int, edits: EditBase, db=Depends(get_db)):
+def update_note(
+    note_id: int,
+    edits: EditBase,
+    curr: Annotated[User, Depends(get_current_user)],
+    db=Depends(get_db),
+):
     note = db.query(Note).filter(Note.id == note_id).first()
     if note is None:
         raise HTTPException(status_code=404, detail="note not found")
@@ -164,7 +181,12 @@ def add_user(user: UserBase, body: Classified, db=Depends(get_db)):
 
 
 @app.delete("/users/{username}")
-def delete_user(username: str, body: Classified, db=Depends(get_db)):
+def delete_user(
+    username: str,
+    body: Classified,
+    curr: Annotated[User, Depends(get_current_user)],
+    db=Depends(get_db),
+):
     user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise HTTPException(status_code=404, detail="user not found")
