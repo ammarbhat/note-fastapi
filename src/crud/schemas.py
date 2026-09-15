@@ -3,7 +3,13 @@ from datetime import date
 
 
 def check_password(pwd):
-    if len(pwd) < 8 or pwd.isalpha() or pwd.isdigit() or pwd.isspace() or len(pwd) > 21:
+    if (
+        len(pwd) < 8
+        or pwd.isalpha()
+        or pwd.isdigit()
+        or pwd.isspace()
+        or len(pwd) > 128
+    ):
         return False
     return True
 

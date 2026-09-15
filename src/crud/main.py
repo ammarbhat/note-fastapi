@@ -202,6 +202,8 @@ def delete_user(
     db=Depends(get_db),
 ):
     user = db.query(User).filter(User.username == username).first()
+    if curr.username != username:
+        raise HTTPException(status_code=403, detail="not authorized")
     if user is None:
         raise HTTPException(status_code=404, detail="user not found")
     elif not pwdhasher.verify(body.password, user.hash_password):
