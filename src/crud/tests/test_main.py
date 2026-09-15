@@ -177,3 +177,17 @@ def test_delete_user(test_db):
     )
 
     assert response.status_code == 200
+
+
+def test_get_me(test_db):
+    user = User(
+        username="anythingss",
+        email="string@example.com",
+        hash_password="$argon2id$v=19$m=65536,t=3,p=4$THQbKxu08x6oCW89/m1vWQ$k94PQ0X2lcuyzJi6H1/2QqczkLK0fTZ7b3rZTn3oQsA",
+    )
+    test_db.add(user)
+    test_db.commit()
+    test_db.refresh(user)
+
+    response = client.get("/users/me")
+    assert response.status_code == 200

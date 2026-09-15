@@ -188,6 +188,12 @@ def add_user(user: UserBase, body: Classified, db=Depends(get_db)):
     return {"message": "User added"}
 
 
+@app.get("/users/me")
+def get_me(curr: Annotated[User, Depends(get_current_user)], db=Depends(get_db)):
+    user = db.query(User).filter(User.username == curr.username).first()
+    return user
+
+
 @app.delete("/users/{username}")
 def delete_user(
     username: str,
