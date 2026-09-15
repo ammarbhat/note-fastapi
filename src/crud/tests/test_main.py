@@ -118,3 +118,45 @@ def test_delete(test_db):
 def test_invalid_delete():
     response = client.delete(f"/notes/1")
     assert response.status_code == 404
+
+
+def test_add_user(test_db):
+    response = client.post(
+        "/users/",
+        json={
+            "user": {"username": "string", "email": "user@example.com"},
+            "body": {"password": "string"},
+        },
+    )
+
+    assert response.status_code == 200
+
+
+def test_add_user_invalid_email(test_db):
+    response = client.post(
+        "/users/",
+        json={
+            "user": {"username": "string", "email": "com"},
+            "body": {"password": "string"},
+        },
+    )
+
+    assert response.status_code == 422
+
+
+def test_add_user_existing_username(test_db):
+    user = User(
+        username="anythings", email="string@example.com", hash_password="hjxalsjkdfh"
+    )
+    test_db.add(user)
+    test_db.commit()
+
+    response = client.post(
+        "/users/",
+        json={
+            "user": {"username": "anythings", "email": "user@example.com"},
+            "body": {"password": "string"},
+        },
+    )
+
+    assert response.status_code == 400

@@ -177,6 +177,7 @@ def add_user(user: UserBase, body: Classified, db=Depends(get_db)):
             )
     db.add(new_user)
     db.commit()
+    return {"message": "User added"}
 
 
 @app.delete("/users/{username}")
