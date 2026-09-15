@@ -8,3 +8,4 @@ wheels/
 first.db
 # Virtual environments
 .venv
+.env

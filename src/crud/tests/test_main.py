@@ -160,3 +160,20 @@ def test_add_user_existing_username(test_db):
     )
 
     assert response.status_code == 400
+
+
+def test_delete_user(test_db):
+    user = User(
+        username="anythingss",
+        email="string@example.com",
+        hash_password="$argon2id$v=19$m=65536,t=3,p=4$qResJI6noxpDoCMXmSdTgA$sCYY18T5aJyOG2EhHpj707XnfVKUwzVRTVea4Keh0HY",
+    )
+    test_db.add(user)
+    test_db.commit()
+    test_db.refresh(user)
+
+    response = client.request(
+        "DELETE", f"/users/{user.username}", json={"password": "string"}
+    )
+
+    assert response.status_code == 200

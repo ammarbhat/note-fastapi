@@ -7,12 +7,15 @@ from crud.schemas import NoteBase, EditBase, UserBase, Classified, TokenData, To
 from crud.database import engine, Base, get_db
 from pwdlib import PasswordHash
 from jwt.exceptions import InvalidTokenError
+from dotenv import load_dotenv
+import os
 import jwt
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
-SECRET_KEY = "d158cfbc72dc60929a36c29d9d3eea4d405403328f4f4e9e289ddfba1d35e54f"
+load_dotenv()
+SECRET_KEY = os.environ["SECRET_KEY"]
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 oauth_scheme = OAuth2PasswordBearer(tokenUrl="token")
