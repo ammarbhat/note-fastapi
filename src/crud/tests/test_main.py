@@ -106,11 +106,8 @@ def test_put_invalid():
 
 def test_delete(test_db):
     note = Note(task="anythings", status=True, event_date=date(2026, 5, 13), user_id=1)
-    user = User(username="john", email="johndoe@example.com", hash_password="stirng")
 
     test_db.add(note)
-    test_db.commit()
-    test_db.add(user)
     test_db.commit()
     test_db.refresh(note)
 

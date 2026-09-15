@@ -136,10 +136,9 @@ def delete_note(
     note_id: int, curr: Annotated[User, Depends(get_current_user)], db=Depends(get_db)
 ):
     note = db.query(Note).filter(Note.id == note_id).first()
-    user = db.query(User).filter(User.username == curr.username).first()
     if note is None:
         raise HTTPException(status_code=404, detail="note not found")
-    if user.id != note.user_id:
+    if curr.id != note.user_id:
         return {"message": "not your note"}
     db.delete(note)
     db.commit()
