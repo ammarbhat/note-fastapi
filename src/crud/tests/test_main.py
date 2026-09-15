@@ -125,7 +125,7 @@ def test_add_user(test_db):
         "/users/",
         json={
             "user": {"username": "string", "email": "user@example.com"},
-            "body": {"password": "string"},
+            "body": {"password": "stringis13"},
         },
     )
 
@@ -137,7 +137,7 @@ def test_add_user_invalid_email(test_db):
         "/users/",
         json={
             "user": {"username": "string", "email": "com"},
-            "body": {"password": "string"},
+            "body": {"password": "stringis13"},
         },
     )
 
@@ -146,7 +146,7 @@ def test_add_user_invalid_email(test_db):
 
 def test_add_user_existing_username(test_db):
     user = User(
-        username="anythings", email="string@example.com", hash_password="hjxalsjkdfh"
+        username="anythings", email="string@example.com", hash_password="hjxalsjkdfh123"
     )
     test_db.add(user)
     test_db.commit()
@@ -155,7 +155,7 @@ def test_add_user_existing_username(test_db):
         "/users/",
         json={
             "user": {"username": "anythings", "email": "user@example.com"},
-            "body": {"password": "string"},
+            "body": {"password": "stringis13"},
         },
     )
 
@@ -166,14 +166,14 @@ def test_delete_user(test_db):
     user = User(
         username="anythingss",
         email="string@example.com",
-        hash_password="$argon2id$v=19$m=65536,t=3,p=4$qResJI6noxpDoCMXmSdTgA$sCYY18T5aJyOG2EhHpj707XnfVKUwzVRTVea4Keh0HY",
+        hash_password="$argon2id$v=19$m=65536,t=3,p=4$THQbKxu08x6oCW89/m1vWQ$k94PQ0X2lcuyzJi6H1/2QqczkLK0fTZ7b3rZTn3oQsA",
     )
     test_db.add(user)
     test_db.commit()
     test_db.refresh(user)
 
     response = client.request(
-        "DELETE", f"/users/{user.username}", json={"password": "string"}
+        "DELETE", f"/users/{user.username}", json={"password": "stringis13"}
     )
 
     assert response.status_code == 200

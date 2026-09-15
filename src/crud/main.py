@@ -101,9 +101,12 @@ def login_for_access_token(
 
 @app.get("/notes")
 def all_notes(
-    current_user: Annotated[User, Depends(get_current_user)], db=Depends(get_db)
+    current_user: Annotated[User, Depends(get_current_user)],
+    db=Depends(get_db),
+    limit: int = 20,
+    skip: int = 0,
 ):
-    return db.query(Note).all()
+    return db.query(Note).offset(skip).limit(limit).all()
 
 
 @app.get("/notes/{note_date}")
@@ -142,7 +145,7 @@ def delete_note(
     if note is None:
         raise HTTPException(status_code=404, detail="note not found")
     if curr.id != note.user_id:
-        return {"message": "not your note"}
+        raise HTTPException(status_code=403, detail="Not your note")
     db.delete(note)
     db.commit()
     return {"message": "note deleted"}
@@ -158,6 +161,8 @@ def update_note(
     note = db.query(Note).filter(Note.id == note_id).first()
     if note is None:
         raise HTTPException(status_code=404, detail="note not found")
+    if curr.id != note.user_id:
+        raise HTTPException(status_code=403, detail="Not your note")
     note.task = edits.task
     note.event_date = edits.event_date
     note.status = edits.status

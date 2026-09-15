@@ -1,5 +1,11 @@
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, field_validator
 from datetime import date
+
+
+def check_password(pwd):
+    if len(pwd) < 8 or pwd.isalpha() or pwd.isdigit() or pwd.isspace() or len(pwd) > 21:
+        return False
+    return True
 
 
 class NoteBase(BaseModel):
@@ -20,6 +26,15 @@ class UserBase(BaseModel):
 
 class Classified(BaseModel):
     password: str
+
+    @field_validator("password")
+    @classmethod
+    def validate(cls, v):
+        if not check_password(v):
+            raise ValueError(
+                "password must be 8+ characters and not entirely letters, digits, or whitespace"
+            )
+        return v
 
 
 class Token(BaseModel):
