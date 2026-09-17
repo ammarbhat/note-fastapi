@@ -27,7 +27,9 @@ def override_get_db():
 
 
 def override_get_current_user():
-    return User(id=1, username="testuser", email="test@test.com", hash_password="fake")
+    return User(
+        id=1, username="anythingss", email="test@test.com", hash_password="fake"
+    )
 
 
 app.dependency_overrides[get_db] = override_get_db
