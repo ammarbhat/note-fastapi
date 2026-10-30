@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-engine = create_engine("sqlite:///first.db", connect_args={"check_same_thread": False})
+engine = create_engine(
+    "postgresql://postgres:aa@localhost:1313/first",
+)
 
 
 class Base(DeclarativeBase):
