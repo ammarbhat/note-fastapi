@@ -1,11 +1,13 @@
-FROM python:3.16.0a1-slim-trixie
+FROM python:3.12-slim-trixie
 
-WORKDIR /code
+COPY --from=ghcr.io/astral-sh/uv:0.12.5 /uv /uvx /bin/
 
-COPY ./requirements.txt /code/requirements.txt
+ADD . /app
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+WORKDIR /app
 
-COPY ./src/crud/main.py ./code/app
+RUN uv sync --locked
 
-CMD ["fastapi", "run", "app/main.py", "--port", "80"]
+EXPOSE 8000
+
+CMD ["uv", "run", "fastapi", "build", "--host", "0.0.0.0", "--port", "8000"]
